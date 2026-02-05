@@ -11,6 +11,8 @@
         path: /home/ubuntu/deployments
         state: directory
         mode: '0755'
+        owner: ubuntu
+        group: ubuntu
     - name: copy deployment file to kubernetesmaster
       copy:
         src: /etc/ansible/opt/playbooks/app-deployment.yml
