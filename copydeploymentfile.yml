@@ -5,4 +5,4 @@
     - name: copy deployment file to kubernetesmaster
       copy:
         src: app-deployment.yml
-        dest: /opt
+        dest: /deployments
