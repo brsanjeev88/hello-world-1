@@ -4,5 +4,5 @@
   tasks:
     - name: copy deployment file to kubernetesmaster
       copy:
-        src: app-deployment.yml
+        src: /etc/ansible/opt/playbooks/app-deployment.yml
         dest: /deployments
