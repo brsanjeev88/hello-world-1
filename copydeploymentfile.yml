@@ -6,3 +6,7 @@
       copy:
         src: /etc/ansible/opt/playbooks/app-deployment.yml
         dest: /home/ubuntu/deployments
+    - name: copy service file to kubernetesmaster
+      copy:
+        src: /etc/ansible/opt/playbooks/service.yml
+        dest: /home/ubuntu/deployments    
