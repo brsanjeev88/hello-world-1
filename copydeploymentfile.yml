@@ -11,7 +11,13 @@
       copy:
         src: /etc/ansible/opt/playbooks/app-deployment.yml
         dest: /home/ubuntu/deployments
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
     - name: copy service file to kubernetesmaster
       copy:
         src: /etc/ansible/opt/playbooks/service.yml
-        dest: /home/ubuntu/deployments    
+        dest: /home/ubuntu/deployments  
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
