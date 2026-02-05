@@ -4,8 +4,12 @@
   tasks:
     - name: Remove the old deployment file
       ansible.builtin.file:
-        path: /home/ubuntu/deployments/app-deployment.yml
+        path: /home/ubuntu/deployments/hello-world-deployment.yml
         state: absent
+    - name: Remove the old service file
+      ansible.builtin.file:
+        path: /home/ubuntu/deployments/hello-world-service.yml
+        state: absent    
     - name: Ensure deployments directory exists
       ansible.builtin.file:
         path: /home/ubuntu/deployments
@@ -15,14 +19,14 @@
         group: ubuntu
     - name: copy deployment file to kubernetesmaster
       copy:
-        src: /etc/ansible/opt/playbooks/app-deployment.yml
+        src: /etc/ansible/opt/playbooks/hello-world-deployment.yml
         dest: /home/ubuntu/deployments
         owner: ubuntu
         group: ubuntu
         mode: '0644'
     - name: copy service file to kubernetesmaster
       copy:
-        src: /etc/ansible/opt/playbooks/service.yml
+        src: /etc/ansible/opt/playbooks/hello-world-service.yml
         dest: /home/ubuntu/deployments  
         owner: ubuntu
         group: ubuntu
