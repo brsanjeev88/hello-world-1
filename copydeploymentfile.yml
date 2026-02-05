@@ -2,6 +2,10 @@
 - hosts: Tomcat
   become: true
   tasks:
+    - name: Remove the old deployment file
+      ansible.builtin.file:
+        path: /home/ubuntu/deployments/app-deployment.yml
+        state: absent
     - name: Ensure deployments directory exists
       ansible.builtin.file:
         path: /home/ubuntu/deployments
