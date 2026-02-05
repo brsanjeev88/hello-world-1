@@ -2,6 +2,11 @@
 - hosts: Tomcat
   become: true
   tasks:
+    - name: Ensure deployments directory exists
+      ansible.builtin.file:
+        path: /home/ubuntu/deployments
+        state: directory
+        mode: '0755'
     - name: copy deployment file to kubernetesmaster
       copy:
         src: /etc/ansible/opt/playbooks/app-deployment.yml
