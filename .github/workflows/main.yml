@@ -1,4 +1,4 @@
-name: Maven Build and SSH Deploy
+name: Maven Build and SSH Deploy 
 
 on:
   push:
