@@ -48,6 +48,8 @@ jobs:
           # Create the parent directory and fix ownership
           sudo mkdir -p /etc/ansible/opt/playbooks
           sudo chown -R ubuntu:ubuntu /etc/ansible
+          
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
           # Clone if missing, otherwise Pull the latest
           if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
