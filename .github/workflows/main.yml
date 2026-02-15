@@ -46,7 +46,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           # Create the parent directory and fix ownership
-          sudo mkdir -p /etc/ansible/opt
+          sudo mkdir -p /etc/ansible/opt/playbooks
           sudo chown -R ubuntu:ubuntu /etc/ansible
 
           # Clone if missing, otherwise Pull the latest
