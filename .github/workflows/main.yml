@@ -50,7 +50,7 @@ jobs:
           
           # 2. Change ownership to the 'ubuntu' user recursively
           # This allows your Ansible commands to run without sudo errors later
-          sudo chown -R ubuntu:ubuntu /etc/ansible/opt/playbooks
+          sudo chown -R ubuntu:ubuntu /etc/ansible
           
           # 3. Set directory permissions (755 is standard for playbooks)
           sudo chmod -R 755 /etc/ansible/opt/playbooks 
