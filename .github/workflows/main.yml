@@ -45,15 +45,15 @@ jobs:
         username: ${{ secrets.ANSIBLE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          # 1. Ensure the directory exists
-          sudo mkdir -p /etc/ansible/opt/playbooks
-          
-          # 2. Change ownership to the 'ubuntu' user recursively
-          # This allows your Ansible commands to run without sudo errors later
+          # Create the parent directory and fix ownership
+          sudo mkdir -p /etc/ansible/opt
           sudo chown -R ubuntu:ubuntu /etc/ansible
-          
-          # 3. Set directory permissions (755 is standard for playbooks)
-          sudo chmod -R 755 /etc/ansible/opt/playbooks 
 
+          # Clone if missing, otherwise Pull the latest
+          if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
+            git clone git@github.com:brsanjeev88/hello-world-1.git /etc/ansible/opt/playbooks
+          else
+            cd /etc/ansible/opt/playbooks && git pull origin main
+          fi
           
       
