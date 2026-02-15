@@ -37,7 +37,23 @@ jobs:
       with:
         name: build-artifact
         path: webapp/target
-
+        
+    - name: Change Ownership on Ansible Server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.ANSIBLE_HOST }}
+        username: ${{ secrets.ANSIBLE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          # 1. Ensure the directory exists
+          sudo mkdir -p /etc/ansible/opt/playbooks
+          
+          # 2. Change ownership to the 'ubuntu' user recursively
+          # This allows your Ansible commands to run without sudo errors later
+          sudo chown -R ubuntu:ubuntu /etc/ansible/opt/playbooks
+          
+          # 3. Set directory permissions (755 is standard for playbooks)
+          sudo chmod -R 755 /etc/ansible/opt/playbooks
 
           
       
