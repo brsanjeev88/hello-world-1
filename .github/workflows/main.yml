@@ -49,13 +49,18 @@ jobs:
           sudo mkdir -p /etc/ansible/opt/playbooks
           sudo chown -R ubuntu:ubuntu /etc/ansible
           
+          # Trust GitHub (prevents the "Host key verification" hang)
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
+          # Force the specific deploy key for this command
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \ 
+          git clone git@github.com:username/repo.git /etc/ansible/opt/playbooks
+          
           # Clone if missing, otherwise Pull the latest
-          if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
-            git clone git@github.com:brsanjeev88/hello-world-1.git /etc/ansible/opt/playbooks
-          else
-            cd /etc/ansible/opt/playbooks && git pull origin main
-          fi
+          #if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
+          #  git clone git@github.com:brsanjeev88/hello-world-1.git /etc/ansible/opt/playbooks
+          #else
+          #  cd /etc/ansible/opt/playbooks && git pull origin main
+          #fi
           
       
