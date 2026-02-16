@@ -52,15 +52,15 @@ jobs:
           # Trust GitHub (prevents the "Host key verification" hang)
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-          # Force the specific deploy key for this command
-          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \ 
-          git clone git@github.com:username/repo.git /etc/ansible/opt/playbooks
-          
-          # Clone if missing, otherwise Pull the latest
-          #if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
-          #  git clone git@github.com:brsanjeev88/hello-world-1.git /etc/ansible/opt/playbooks
-          #else
-          #  cd /etc/ansible/opt/playbooks && git pull origin main
-          #fi
+          if [ ! -d "/etc/ansible/opt/playbooks/.git" ]; then
+              # Clone for the first time
+              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \
+              git clone git@github.com:yourusername/your-repo.git /etc/ansible/opt/playbooks
+          else
+              # Just pull the latest changes
+              cd /etc/ansible/opt/playbooks
+              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_deploy -o StrictHostKeyChecking=no" \
+              git pull origin main
+          fi
           
       
